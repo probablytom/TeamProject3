@@ -9,6 +9,8 @@ class Chat(models.Model):
     closed = models.DateTimeField(null=True, blank=True)
     users = models.ManyToManyField(User, blank=True)
     ticket = models.OneToOneField('chat.Ticket', null=True, blank=True)
+    votes = models.IntegerField(default=0)
+    voted = models.ManyToManyField(User, blank=True, null=True, related_name='chat_votes')
 
     class Meta:
         permissions = (('canTagTickets', 'Can tag chats as tickets'),
@@ -48,8 +50,9 @@ class Ticket(models.Model):
     closed = models.DateTimeField(null=True, blank=True)
     priority = models.ForeignKey(Priority, null=True, blank=True)
     due_date = models.DateTimeField(null=True)
-    assignee = models.ForeignKey(User, null=True)
+    assignee = models.ForeignKey(User, null=True, blank=True, related_name='ticket_assignee')
     cost = models.IntegerField(null=True)
+    created_by = models.ForeignKey(User, null=True, blank=True, related_name='ticket_created_by')
 
     class Meta:
             permissions = (('canEditAllTickets', 'Can edit all tickets'),)  # Intended for use with ticket priorities.

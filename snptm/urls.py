@@ -36,6 +36,8 @@ urlpatterns = patterns('',
     url(r'^profiles/(?P<username>[a-zA-Z0-9]+)/permissions/$', 'core.views.user_permission_change', name="user_permission_change"),
 
     # Add the URLs for the API
+    url(r'^chats/([0-9]+)/vote/$', 'chat.views.upvote_chat', name='upvote_chat'),
     (r'^api/', include(v1_api.urls)),
+
 
 )

@@ -98,7 +98,7 @@ $(function () {
                 }
 
                 // Create mustache template for rendering tickets list
-				var chatListTemplate = '{{#chats}}<a class="list-group-item" id="chat-{{ id }}" href="/chats/{{ id }}">{{ title }}</a>{{/chats}}';
+				var chatListTemplate = '{{#chats}}<a href="/chats/{{ id }}"><li class="list-group-item" id="chat-{{ id }}">{{ title }}</a><a id="vote-{{id}}" href="#"><span class="pull-right"><i class="fa fa-thumbs-o-up"></i> {{ votes }}</span></a></li>{{/chats}}';
                 renderTemplate(openTicketsList, chatListTemplate, {'chats': openChatsObject});
                 renderTemplate(closedTicketsList, chatListTemplate, {'chats': closedChatsObject});
 
